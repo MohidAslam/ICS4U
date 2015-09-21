@@ -5,6 +5,7 @@ package aslam;
  *    city, province, postal code, phone number and birth date.
  *    
  * @author Mohid Aslam
+ * 
  *September 21 2015
  */
 public class ContestantInformation {

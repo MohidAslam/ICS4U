@@ -1,22 +1,30 @@
+/**
+ * 
+ */
 package aslam;
 /** 
  *  This class holds the information of a contestant.
  *   It has fields for first name, last name, street address,
- *    city, province, postal code, phone number and birth date.
+ *   city, province, postal code, phone number and birth date.
  *    
  * @author Mohid Aslam
- *September 21 2015
+ * 
+ *September 23 2015
  */
 public class ContestantInformation {
 	
-	private String firstName, lastName, streetName, streetNumber, city, province,
+	private String firstName, lastName, streetName, streetNumber, city,
 	postalCode, birthDate, phoneNumber;
-	
+	private String province;
 	/**
 	 * Empty constructor
 	 */
-	public ContestantInformation(){
-	
+	/**
+	 * 
+	 */
+	public ContestantInformation() {
+		// TODO Auto-generated constructor stub
+		
 	}
 	/**
 	 * 
@@ -42,8 +50,17 @@ public class ContestantInformation {
 	}
 	/**
 	 * @param firstName the firstName to set
+	 * @throws InvalidInputException 
+	 * 
 	 */
-	public void setFirstName(String firstName) {
+	public void setFirstName(String firstName) throws InvalidInputException{
+		if(firstName.length() == 0){
+			throw new InvalidInputException("You cannot leave your first name empty.");
+		}
+		for(int i = 0; i < firstName.length(); i ++){
+			if (Character.isDigit(firstName.charAt(i)))
+			throw new InvalidInputException("You cannot have a number in your name.");
+			}
 		this.firstName = firstName;
 	}
 	/**
@@ -54,8 +71,17 @@ public class ContestantInformation {
 	}
 	/**
 	 * @param lastName the lastName to set
+	 * @throws InvalidInputException 
 	 */
-	public void setLastName(String lastName) {
+	public void setLastName(String lastName) throws InvalidInputException {
+		if(lastName.length() == 0){
+			throw new InvalidInputException("You cannot leave your last name empty.");
+		}
+		for(int i = 0; i < lastName.length(); i ++){
+			if (Character.isDigit(firstName.charAt(i))){
+			throw new InvalidInputException("You cannot have a number in your name.");
+			}
+		}
 		this.lastName = lastName;
 	}
 	/**
@@ -66,8 +92,12 @@ public class ContestantInformation {
 	}
 	/**
 	 * @param streetName the streetName to set
+	 * @throws InvalidInputException 
 	 */
-	public void setStreetName(String streetName) {
+	public void setStreetName(String streetName) throws InvalidInputException {
+		if(streetName.length() == 0){
+			throw new InvalidInputException("You cannot leave your street name empty.");
+		}
 		this.streetName = streetName;
 	}
 	/**
@@ -78,8 +108,12 @@ public class ContestantInformation {
 	}
 	/**
 	 * @param streetNumber the streetNumber to set
+	 * @throws InvalidInputException 
 	 */
-	public void setStreetNumber(String streetNumber) {
+	public void setStreetNumber(String streetNumber) throws InvalidInputException {
+		if(streetNumber.length() == 0){
+			throw new InvalidInputException("You cannot leave your street number empty.");
+		}
 		this.streetNumber = streetNumber;
 	}
 	/**
@@ -90,9 +124,46 @@ public class ContestantInformation {
 	}
 	/**
 	 * @param city the city to set
+	 * @throws InvalidInputException 
 	 */
-	public void setCity(String city) {
+	public void setCity(String city) throws InvalidInputException {
+		if(city.length() == 0){
+			throw new InvalidInputException("You cannot leave your city empty.");
+		}
 		this.city = city;
+	}
+	/**
+	 * @return the postalCode
+	 */
+	public String getPostalCode() {
+		return postalCode;
+	}
+	/**
+	 * @param postalCode the postalCode to set
+	 * @throws InvalidInputException 
+	 */
+	public void setPostalCode(String postalCode) throws InvalidInputException {
+		if(lastName.length() == 0){
+			throw new InvalidInputException("You cannot leave your postal code empty.");
+		}
+		if (postalCode.length() > 6 
+				|| postalCode.length() < 6){
+			throw new InvalidInputException("Postal code must be only 6 characters "
+					+ "long (no spaces).");
+		}	
+		for(int i = 0; i <6; i += 2){
+			if (!Character.isLetter(postalCode.charAt(i))){
+			throw new InvalidInputException("Postal code must  follow the format, "
+					+ "number then letter: X#X#X#");
+			}
+		}
+		for(int i = 1; i <6; i += 2){
+			if (!Character.isDigit(postalCode.charAt(i))){
+			throw new InvalidInputException("Postal code must  follow the format, "
+					+ "number then letter: X#X#X#");
+			}
+		}
+		this.postalCode = postalCode;
 	}
 	/**
 	 * @return the province
@@ -107,18 +178,6 @@ public class ContestantInformation {
 		this.province = province;
 	}
 	/**
-	 * @return the postalCode
-	 */
-	public String getPostalCode() {
-		return postalCode;
-	}
-	/**
-	 * @param postalCode the postalCode to set
-	 */
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
-	}
-	/**
 	 * @return the birthDate
 	 */
 	public String getBirthDate() {
@@ -126,8 +185,12 @@ public class ContestantInformation {
 	}
 	/**
 	 * @param birthDate the birthDate to set
+	 * @throws InvalidInputException 
 	 */
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(String birthDate) throws InvalidInputException {
+		if(birthDate.length() == 0){
+			throw new InvalidInputException("You cannot leave your birth date empty.");
+		}
 		this.birthDate = birthDate;
 	}
 	/**
@@ -138,16 +201,22 @@ public class ContestantInformation {
 	}
 	/**
 	 * @param phoneNumber the phoneNumber to set
+	 * @throws InvalidInputException 
 	 */
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) throws InvalidInputException {
+		if(lastName.length() == 0){
+			throw new InvalidInputException("You cannot leave your phone number empty.");
+		}
+		if (phoneNumber.length() > 10  
+				|| phoneNumber.length() < 10){
+			throw new InvalidInputException("Phone number must only be 10 characters "
+					+ "long (no spaces or dashes).");
+		}
 		this.phoneNumber = phoneNumber;
 	}
-	
 	public String toString(){
 		return firstName + " " + lastName + " " + streetName + " " + streetNumber 
 				+ " " + city + " " + province + " " + postalCode + " " + birthDate
 				+ " " + phoneNumber ;	
 	}
-	
 }
-

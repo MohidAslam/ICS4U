@@ -29,9 +29,14 @@ public class Label {
 		return number;
 	}
 	public String formatAddress() {
+		int midPoint = ci1.getPostalCode().length()/2;
+		char[] ps = ci1.getPostalCode().toCharArray();
+		String postalCode = Character.toString(ps[0]) + Character.toString(ps[1]) 
+		+ Character.toString(ps[2]) +' ' + Character.toString(ps[3]) + 
+		Character.toString(ps[4]) + Character.toString(ps[5]);
 		String address = ci1.getStreetNumber() + " " + ci1.getStreetName() + 
 				"\n" + ci1.getCity() + ", " + ci1.getProvince() + "\n" 
-				+ ci1.getPostalCode() + "\n" ;
+				+ postalCode + "\n" ;
 		return address;
 	}
 	public String formatName() {

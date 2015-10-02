@@ -19,12 +19,8 @@ public class ContestantInformation {
 	/**
 	 * Empty constructor
 	 */
-	/**
-	 * 
-	 */
 	public ContestantInformation() {
 		// TODO Auto-generated constructor stub
-		
 	}
 	/**
 	 * 
@@ -78,7 +74,7 @@ public class ContestantInformation {
 			throw new InvalidInputException("You cannot leave your last name empty.");
 		}
 		for(int i = 0; i < lastName.length(); i ++){
-			if (Character.isDigit(firstName.charAt(i))){
+			if (Character.isDigit(lastName.charAt(i))){
 			throw new InvalidInputException("You cannot have a number in your name.");
 			}
 		}
@@ -175,6 +171,55 @@ public class ContestantInformation {
 	 * @param province the province to set
 	 */
 	public void setProvince(String province) {
+		switch(province){
+		case "Ontario": province = Provinces.ON.toString();
+		case "ontario": province = Provinces.ON.toString();
+			break;
+		case "Manitoba": province = Provinces.MB.toString();
+		case "manitoba": province = Provinces.MB.toString();
+			break;
+		case "Alberta": province = Provinces.QC.toString();
+		case "alberta": province = Provinces.QC.toString();
+			break;
+		case "Quebec": province = Provinces.QC.toString();
+		case "quebec": province = Provinces.QC.toString();
+			break;
+		case "Nunavut": province = Provinces.NU.toString();
+		case "nunavut": province = Provinces.NU.toString();
+			break;
+		case "Yukon": province = Provinces.YT.toString();
+		case "yukon": province = Provinces.YT.toString();
+		case "Yukon Territory": province = Provinces.YT.toString();
+		case "yukon territory": province = Provinces.YT.toString();
+			break;
+		case "British Columbia": province = Provinces.BC.toString();
+		case "british columbia": province = Provinces.BC.toString();
+			break;
+		case "Prince Edward Island": province = Provinces.PEI.toString();
+		case "prince edward island": province = Provinces.PEI.toString();
+		case "PEI": province = Provinces.PEI.toString();
+		case "pei": province = Provinces.PEI.toString();
+		case "P.E.I":	 province = Provinces.PEI.toString();
+			break;
+		case "Newfound Land and Labrador": province = Provinces.NL.toString();
+		case "Newfound Land": province = Provinces.NL.toString();
+		case "newfound land": province = Provinces.NL.toString();
+		case "newfound land and labrador": province = Provinces.NL.toString();
+			break;
+		case "New Brunswick": province = Provinces.NB.toString();
+		case "new brunswick": province = Provinces.NB.toString();
+			break;
+		case "Saskatchewan": province = Provinces.SK.toString();
+		case "saskatchewan": province = Provinces.SK.toString();
+			break;
+		case "North West Territory": province = Provinces.NWT.toString();
+		case "north west territory": province = Provinces.NWT.toString();
+
+			break;
+		case "Nova Scotia": province = Provinces.NS.toString();
+		case "nova scotia": province = Provinces.NS.toString();
+		}
+		
 		this.province = province;
 	}
 	/**

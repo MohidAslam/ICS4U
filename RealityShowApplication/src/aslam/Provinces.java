@@ -8,5 +8,5 @@ package aslam;
  *
  */
 public enum Provinces {
-	ON, QC, NL, NT, AB, BC, NB, NS, SK, NU, PEI, YT;
+	ON, QC, NL, MB, AB, BC, NB, NS, SK, NU, PEI, YT, NWT;
 }

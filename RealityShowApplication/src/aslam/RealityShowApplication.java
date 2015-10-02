@@ -125,12 +125,12 @@ public class RealityShowApplication {
 			}
 			catch (InvalidInputException g){
 				System.out.print(g.getMessage());
-				flag = true;
+				flag = true; 
 			}
 		}
 		while(flag);
 		
-		do{
+		do{		
 			try{
 				flag = false;
 				System.out.print("Please enter your phone number.");
@@ -143,6 +143,7 @@ public class RealityShowApplication {
 			}
 		}
 		while(flag); 
+		
 		System.out.println("Please answer the following skill testing question.");
 		System.out.println("What is 2+2x2/2?");
 		String input = scan.nextLine();
@@ -150,6 +151,14 @@ public class RealityShowApplication {
 		boolean userAnswer = false;
 		if (answer == 4){
 			userAnswer = true;
+		}
+		Label label = new Label(contestant1);
+		System.out.println(label.toString());
+		if (userAnswer == true){
+			System.out.println("You got the skill testing question right.");
+		}
+		else{
+			System.out.println("You got the skill testing question wrong.");
 		}
 	}
 }

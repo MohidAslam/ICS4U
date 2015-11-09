@@ -44,7 +44,7 @@ public class Label {
 		return name;
 	}
 	public String toString(){
-		String output = formatName() + formatAddress() + formatNumber();
+		String output ="\n"+ formatName() + formatAddress() + formatNumber();
 		return output;
 	}
 }

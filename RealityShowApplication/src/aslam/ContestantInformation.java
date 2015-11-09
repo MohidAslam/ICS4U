@@ -11,37 +11,59 @@ package aslam;
  * 
  *September 23 2015
  */
-public class ContestantInformation {
+public class ContestantInformation implements Comparable {
 	
 	private String firstName, lastName, streetName, streetNumber, city,
-	postalCode, birthDate, phoneNumber;
-	private String province;
+	province, postalCode, birthDate, phoneNumber;
 	/**
 	 * Empty constructor
 	 */
+	
+	
 	public ContestantInformation() {
+		firstName = "" ;
+		lastName = "" ;
+		streetName = ""; 
+		streetNumber = "";
+		city = "";
+		province = "";
+		postalCode = "";
+		birthDate = "";
+		phoneNumber = "";
 		// TODO Auto-generated constructor stub
 	}
 	/**
 	 * 
-	 * @param a
-	 * @param b
-	 * @param c
-	 * @param d
-	 * @param e
-	 * @param f
-	 * @param g
-	 * @param h
-	 * @param i
+	 * @param firstName
+	 * @param lastName
+	 * @param streetName
+	 * @param streetNumber
+	 * @param city
+	 * @param province
+	 * @param postalCode
+	 * @param birthDate
+	 * @param phoneNumber
+	 * @throws InvalidInputException 
 	 */
-	public ContestantInformation(String a, String b, String c, String d, String e, 
-			String f, String g, String h, String i){
+
+	public ContestantInformation(String firstName, String lastName, String streetName, String streetNumber, String city, 
+			String province, String postalCode, String birthDate, String phoneNumber) throws InvalidInputException{
 		
+		setFirstName(firstName);	
+		setLastName(lastName);	
+		setStreetName(streetName);	
+		setStreetNumber(streetNumber);	
+		setCity(city);	
+		setProvince(province);	
+		setPostalCode(postalCode);	
+		setBirthDate(birthDate);	
+		setPhoneNumber(phoneNumber);
 	}
+	
 	/**
 	 * @return the firstName
 	 */
-	public String getFirstName() {
+	public String getFirstName() {	
 		return firstName;
 	}
 	/**
@@ -49,6 +71,7 @@ public class ContestantInformation {
 	 * @throws InvalidInputException 
 	 * 
 	 */
+
 	public void setFirstName(String firstName) throws InvalidInputException{
 		if(firstName.length() == 0){
 			throw new InvalidInputException("You cannot leave your first name empty.");
@@ -259,9 +282,26 @@ public class ContestantInformation {
 		}
 		this.phoneNumber = phoneNumber;
 	}
+	
 	public String toString(){
 		return firstName + " " + lastName + " " + streetName + " " + streetNumber 
 				+ " " + city + " " + province + " " + postalCode + " " + birthDate
 				+ " " + phoneNumber ;	
+	}
+	public int compareTo(ContestantInformation contestant1){
+		
+		if(contestant1.getFirstName().compareTo(this.firstName) == 0){
+			return 0;
+		}
+		else if(contestant1.getFirstName().compareTo(this.firstName) == 1){
+			return 1;
+		}
+		else { //(contestant1.getFirstName().compareTo(this.firstName) == -1)
+			return -1;
+		}
+	}
+	public int compareTo(Object args) {
+		ContestantInformation ci= (ContestantInformation) args;
+		return 0;
 	}
 }

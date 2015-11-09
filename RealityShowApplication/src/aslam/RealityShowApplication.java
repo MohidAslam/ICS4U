@@ -3,6 +3,12 @@
  */
 package aslam;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,31 +18,139 @@ import java.util.Scanner;
  */
 public class RealityShowApplication {
 	 static Scanner scan = new Scanner(System.in);
-
+	 
 	/**
 	 * 
 	 */
 	public RealityShowApplication() {
 		// TODO Auto-generated constructor stub
 	}
-
 	/**
 	 * @param args
+	 * @throws FileNotFoundException 
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ArrayList<String> contestantInformation = new ArrayList<String>();
+	public static void main(String[] args) throws FileNotFoundException {
+
+		// TODO Auto-generated method stub 
+		ArrayList<ContestantInformation> contestants = new ArrayList<ContestantInformation>();
+		String input= null;
+		
+		do{
+			System.out.print("\n" +"Please choose one of the options:" +"\n" + 
+					"1. Add a new contestant." + "\n" + "2. Search a contestant." +"\n" +
+					"3. Print Label"+ "\n"+ "4. Remove a contestant."+ "\n"+ "5. Remove all contestants." + 
+					"\n" + "6. Save file."+ "\n" + "7. Load file.");
+			 input = scan.nextLine();
+			
+			if (input.equals("1")){
+			addContestant(contestants);
+			}
+			else if(input.equals("2")){
+				System.out.print("Please enter their first name.");
+				input = scan.nextLine();
+				String searchFirstName = input;
+				
+				System.out.print("Please enter their last name.");
+				input = scan.nextLine();
+				String searchLastName = input;
+				int binaryIndex = Search.binaryStringSearch(contestants, searchFirstName, searchLastName);
+				System.out.println("The contestant, "+ searchFirstName + " "+ searchLastName+", is found at index " +binaryIndex);
+			}
+			else if (input.equals("3")){
+				printContestants(contestants);
+			}
+			else if (input.equals("4")){
+				System.out.print("Please enter their first name.");
+				input = scan.nextLine();
+				String searchFirstName = input;
+				
+				System.out.print("Please enter their last name.");
+				input = scan.nextLine();
+				String searchLastName = input;
+				int binaryIndex = Search.binaryStringSearch(contestants, searchFirstName, searchLastName);
+				contestants.remove(binaryIndex);
+			}
+			else if(input.equals("5")){
+				contestants.removeAll(contestants);
+			}
+			else if(input.equals("6")){
+				saveFile(contestants);
+			}
+			else if(input.equals("7")){
+				loadFile(contestants);
+			}
+		}while(input != "5");
+	}
+/**
+ * 
+ * @param contestants
+ * @throws FileNotFoundException 
+ */
+	public static void saveFile(ArrayList<ContestantInformation> contestants) throws FileNotFoundException {
+		
+		for (int i = 0; i <contestants.size(); i++){
+			FileOutputStream fileOutputStream=new FileOutputStream("contestantFile.txt");
+			PrintStream fps = new PrintStream(fileOutputStream);
+			fps.println(contestants.size());
+			fps.println(contestants.get(i).getFirstName());
+		}			
+	}
+	/**
+	 * 
+	 * @param contestants
+	 * @throws FileNotFoundException
+	 */
+	public static void loadFile(ArrayList<ContestantInformation> contestants) throws FileNotFoundException{
+		BufferedReader fbr = new BufferedReader(new FileReader("contestantFile.txt"));
+		try{
+			int size = Integer.parseInt(fbr.readLine());
+			for(int i = 0; i < size; i++){
+				String firstName = fbr.readLine();
+				String lastName = fbr.readLine();
+				String streetName = fbr.readLine(); 
+				String streetNumber = fbr.readLine();
+				String city = fbr.readLine();
+				String province = fbr.readLine();
+				String postalCode = fbr.readLine();
+				String birthDate = fbr.readLine();
+				String phoneNumber = fbr.readLine();
+				
+				try {
+					contestants.add(new ContestantInformation(firstName, lastName, streetName,
+							streetNumber, city, province, postalCode, birthDate,phoneNumber));
+				} catch (InvalidInputException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}catch(IOException e){
+			System.out.print("File is not formatted properly.");
+		}
+		
+	}
+	public static void printContestants(ArrayList<ContestantInformation> contestants){
+		for(int i = 0; i<contestants.size();i++){
+			Label label = new Label(contestants.get(i));
+			System.out.println(label.toString());
+		}
+		
+	}
+	/**
+	 * 
+	 * @param contestants
+	 */
+	public static void addContestant(ArrayList<ContestantInformation>contestants){
+		ContestantInformation contestant = new ContestantInformation();
 		boolean flag = false;
-		ContestantInformation contestant1 = new ContestantInformation();
 		do{
 			try{
 				flag = false;
 				System.out.print("Please enter your first name.");
 				String firstName = scan.nextLine();
-				contestant1.setFirstName(firstName);
+				contestant.setFirstName(firstName);
 			}
-			catch (InvalidInputException a){
-				System.out.print(a.getMessage());
+			catch (InvalidInputException firstName){
+				System.out.print(firstName.getMessage());
 				flag = true;
 			}
 		}
@@ -47,10 +161,10 @@ public class RealityShowApplication {
 				flag = false;
 				System.out.print("Please enter your last name.");
 				String lastName = scan.nextLine();
-				contestant1.setLastName(lastName);
+				contestant.setLastName(lastName);
 			}
-			catch (InvalidInputException b){
-				System.out.print(b.getMessage());
+			catch (InvalidInputException lastName){
+				System.out.print(lastName.getMessage());
 				flag = true;
 			}
 		}
@@ -61,10 +175,10 @@ public class RealityShowApplication {
 				flag = false;
 				System.out.print("Please enter your street number.");
 				String streetNumber = scan.nextLine();
-				contestant1.setStreetNumber(streetNumber);
+				contestant.setStreetNumber(streetNumber);
 			}
-			catch (InvalidInputException c){
-				System.out.print(c.getMessage());
+			catch (InvalidInputException streetNumber){
+				System.out.print(streetNumber.getMessage());
 				flag = true;
 			}
 		}
@@ -75,10 +189,10 @@ public class RealityShowApplication {
 				flag = false;
 				System.out.print("Please enter your street name.");
 				String streetName = scan.nextLine();
-				contestant1.setStreetName(streetName);
+				contestant.setStreetName(streetName);
 			}
-			catch (InvalidInputException d){
-				System.out.print(d.getMessage());
+			catch (InvalidInputException streetName){
+				System.out.print(streetName.getMessage());
 				flag = true;
 			}
 		}
@@ -89,10 +203,10 @@ public class RealityShowApplication {
 				flag = false;
 				System.out.print("Please enter your city.");
 				String city = scan.nextLine();
-				contestant1.setCity(city);
+				contestant.setCity(city);
 			}
-			catch (InvalidInputException e){
-				System.out.print(e.getMessage());
+			catch (InvalidInputException city){
+				System.out.print(city.getMessage());
 				flag = true;
 			}
 		}
@@ -100,17 +214,17 @@ public class RealityShowApplication {
 				
 		System.out.print("Please enter your province.");	
 		String province = scan.nextLine();	
-		contestant1.setProvince(province);
+		contestant.setProvince(province);
 		
 		do{
 			try{
 				flag = false;
 				System.out.print("Please enter your postal code.");
 				String postalCode = scan.nextLine();
-				contestant1.setPostalCode(postalCode);
+				contestant.setPostalCode(postalCode);
 			}
-			catch (InvalidInputException f){
-				System.out.print(f.getMessage());
+			catch (InvalidInputException postalCode){
+				System.out.print(postalCode.getMessage());
 				flag = true;
 			}
 		}
@@ -121,10 +235,10 @@ public class RealityShowApplication {
 				flag = false;
 				System.out.print("Please enter your birth date.");
 				String birthDate = scan.nextLine();
-				contestant1.setBirthDate(birthDate);
+				contestant.setBirthDate(birthDate);
 			}
-			catch (InvalidInputException g){
-				System.out.print(g.getMessage());
+			catch (InvalidInputException birthDate){
+				System.out.print(birthDate.getMessage());
 				flag = true; 
 			}
 		}
@@ -135,30 +249,16 @@ public class RealityShowApplication {
 				flag = false;
 				System.out.print("Please enter your phone number.");
 				String phoneNumber = scan.nextLine();
-				contestant1.setPhoneNumber(phoneNumber);
+				contestant.setPhoneNumber(phoneNumber);
 			}
-			catch (InvalidInputException h){
-				System.out.print(h.getMessage());
+			catch (InvalidInputException phoneNumber){
+				System.out.print(phoneNumber.getMessage());
 				flag = true;
 			}
 		}
 		while(flag); 
 		
-		System.out.println("Please answer the following skill testing question.");
-		System.out.println("What is 2+2x2/2?");
-		String input = scan.nextLine();
-		int answer = Integer.parseInt(input);
-		boolean userAnswer = false;
-		if (answer == 4){
-			userAnswer = true;
-		}
-		Label label = new Label(contestant1);
-		System.out.println(label.toString());
-		if (userAnswer == true){
-			System.out.println("You got the skill testing question right.");
-		}
-		else{
-			System.out.println("You got the skill testing question wrong.");
-		}
+		contestants.add(contestant);
 	}
+	
 }

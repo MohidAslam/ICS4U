@@ -1,7 +1,15 @@
+/**
+ * 
+ */
 package aslam;
-
 import java.util.ArrayList;
-
+/**
+ * This class is used to search for a specific contestant and is used by the main method.
+ * 
+ * 
+ * @author Mohid Aslam
+ * 
+ */
 public class Search {
 
 	public Search() {
@@ -58,7 +66,7 @@ public class Search {
 	public static int binaryStringSearch(ArrayList<ContestantInformation> contestants, 
 			String searchFirstName, String searchLastName){
 		int begIndex = 0;
-		int endIndex = contestants.size()-1;
+		int endIndex = contestants.size();
 		int midIndex = (endIndex + begIndex)/2;
 		int found = -1;
 		

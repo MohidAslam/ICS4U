@@ -4,6 +4,9 @@
 package aslam;
 
 /**
+ * This class holds information for the provinces as enums to be formatted.
+ * 
+ * 
  * @author Mohid Aslam
  *
  */

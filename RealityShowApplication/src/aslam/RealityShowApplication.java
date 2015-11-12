@@ -277,6 +277,7 @@ public class RealityShowApplication {
 		System.out.println("Skill testing question:" + "\n" + "What is 2*2+2/2");
 		String answer = scan.nextLine();
 		if(answer == "5"){
+			System.out.println("Congratulations you have qualified to be a contestant.");
 			contestants.add(contestant);
 		}
 	}

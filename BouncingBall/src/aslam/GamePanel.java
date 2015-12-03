@@ -165,6 +165,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	{	
 		x = e.getX ();	 
 		y = e.getY ();	 
+		for (int i = 0; i < numBalls; i++) {
+		int drawX = (int) getX();
+		int drawY = (int) getY();
+		int distance = (int) Math.sqrt((x-drawX)^2+(y-drawY)^2);
+		if(x <= distance || y <= distance){
+			exit();
+		}
+	}
 		repaint ();	   
 	}
 
@@ -178,5 +186,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		x = e.getX ();	 
 		y = e.getY ();		
 		repaint ();	   
+	}
+	public void exit(){
+		System.exit(0);
 	}
 }

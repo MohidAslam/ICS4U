@@ -47,8 +47,6 @@ public class KeyListenerDemo extends Applet implements KeyListener
 	key = e.getKeyChar ();
 	repaint ();
     }
-
-
     /**
     * called when a key is released
     * @param e Thekeyboard event

@@ -165,7 +165,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	{	
 		x = e.getX ();	 
 		y = e.getY ();
-		if(x = )
+		
 		repaint ();	   
 	}
 

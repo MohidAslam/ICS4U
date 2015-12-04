@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	/**
 	 * The number of balls on the screen.
 	 */
-	final int numBalls = 50;
+	final int numBalls = 100;
 	/**
 	 * The pause between repainting (should be set for about 30 frames per
 	 * second).
@@ -50,7 +50,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	 * An array of balls.
 	 */
 	FlashingBall[] ball = new FlashingBall[numBalls];
-
 	/** main program (entry point) */
 	public static void main(String[] args) {
 
@@ -64,7 +63,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		c.add(new GamePanel());
 		frame.pack();
 	}
-
 	public GamePanel(){
 		// Start the ball bouncing (in its own thread)
 		this.setPreferredSize(new Dimension(width, height));
@@ -72,12 +70,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		
 		for (int i = 0; i < numBalls; i++) {
 			ball[i] = new FlashingBall(Math.random() * 1399, Math.random() * 899, 0, width, 0, height);
-			ball[i].setXSpeed(0);
-			ball[i].setYSpeed(Math.random() * 16-8);
+			ball[i].setXSpeed(Math.random() * 16-8);
+			ball[i].setYSpeed(0);
 			ball[i].setColor(new Color((int) (Math.random() * 256), (int) (Math
 					.random() * 256), (int) (Math.random() * 256)));
 		}
-		addMouseMotionListener (this);
+		addMouseMotionListener(this);
 		Thread gameThread = new Thread(this);
 		gameThread.start();
 
@@ -104,9 +102,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		for (int i = 0; i < numBalls; i++) {
 			ball[i].draw(g);
 		}  
-		g.setColor(Color.WHITE);
-		g.fillOval(x,y,25,25);
+		g.setColor(Color.YELLOW);
+		//g.fillOval(x,y,25,25);
+		g.fillArc(x, y, 100, 100, 40, 315);
 	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -146,7 +146,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -154,8 +153,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		// TODO Auto-generated method stub
 		
 	}
-	
-	   
 	/**
 	     * called when mouse is moved in the window	   
 	     * @param e The mouse event	    
@@ -166,14 +163,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		x = e.getX ();	 
 		y = e.getY ();	 
 		for (int i = 0; i < numBalls; i++) {
-		int drawX = (int) getX();
-		int drawY = (int) getY();
-		int distance = (int) Math.sqrt((x-drawX)^2+(y-drawY)^2);
-		if(x <= distance || y <= distance){
-			exit();
+			int drawX=  (int) ball[i].getX();
+			int drawY = (int) ball[i].getY();
+			double distance = Math.sqrt((x-drawX)^2+(y-drawY)^2);
+			if(x <= distance || y <= distance){
+				
+			}
 		}
-	}
-		repaint ();	   
+		repaint();	   
 	}
 
 	    /**

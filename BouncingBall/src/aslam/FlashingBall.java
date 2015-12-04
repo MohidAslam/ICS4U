@@ -85,7 +85,6 @@ public class FlashingBall extends MovingObject {
 			g.setColor(Color.white);
 			g.fillOval(drawX + radius / 2, drawY + radius / 2, radius, radius);
 		}
-
 	}
 	
 	/**

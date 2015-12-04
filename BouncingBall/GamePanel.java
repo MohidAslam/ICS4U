@@ -104,7 +104,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		for (int i = 0; i < numBalls; i++) {
 			ball[i].draw(g);
 		}  
-		g.setColor(Color.WHITE);
+		g.setColor(new Color((int) (Math.random() * 256), (int) (Math
+				.random() * 256), (int) (Math.random() * 256)));
 		g.fillOval(x,y,25,25);
 	}
 	@Override

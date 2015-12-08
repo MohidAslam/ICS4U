@@ -3,6 +3,7 @@ package aslam;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -12,6 +13,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -34,9 +36,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	int x =-1;
 	int y = -1;
 	
+	boolean done;
+	boolean done2;
 	int width = 1400;
-	int height = 900;
-
+	int height = 950;
+	int points = 0;
+	
+	String win = "YOU WON!!!";
+	
 	/**
 	 * The number of balls on the screen.
 	 */
@@ -54,9 +61,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	public static void main(String[] args) {
 
 		// Set up main window (using Swing's Jframe)
-		JFrame frame = new JFrame("Dodgeball");
+		JFrame frame = new JFrame("PAC-MAN");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(new Dimension(1400, 900));
+		frame.setSize(new Dimension(1400, 950));
 		frame.setAutoRequestFocus(false);
 		frame.setVisible(true);
 		Container c = frame.getContentPane();
@@ -66,19 +73,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	public GamePanel(){
 		// Start the ball bouncing (in its own thread)
 		this.setPreferredSize(new Dimension(width, height));
-		this.setBackground(Color.BLACK);
+		this.setBackground(Color.WHITE);
 		
 		for (int i = 0; i < numBalls; i++) {
 			ball[i] = new FlashingBall(Math.random() * 1399, Math.random() * 899, 0, width, 0, height);
-			ball[i].setXSpeed(Math.random() * 16-8);
-			ball[i].setYSpeed(0);
+			ball[i].setXSpeed(Math.random() * 40-20);
+			ball[i].setYSpeed(Math.random() * 40-20);
 			ball[i].setColor(new Color((int) (Math.random() * 256), (int) (Math
 					.random() * 256), (int) (Math.random() * 256)));
 		}
 		addMouseMotionListener(this);
 		Thread gameThread = new Thread(this);
 		gameThread.start();
-
 	}
 
 	/**
@@ -99,12 +105,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		if (done){
+			g.setFont(new Font("Times New Roman", Font.PLAIN, 40));
+			g.drawString("YOU WON!!!", 500, 300);
+		}
 		for (int i = 0; i < numBalls; i++) {
 			ball[i].draw(g);
 		}  
 		g.setColor(Color.YELLOW);
 		//g.fillOval(x,y,25,25);
-		g.fillArc(x, y, 100, 100, 40, 315);
+		g.fillArc(x - 50, y - 50, 100, 100, 40, 315);
 	}
 	
 	@Override
@@ -159,20 +169,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	     **/
 	   
 	public void mouseMoved (MouseEvent e)	   
-	{	
+	{		 
 		x = e.getX ();	 
-		y = e.getY ();	 
-		for (int i = 0; i < numBalls; i++) {
-			int drawX=  (int) ball[i].getX();
-			int drawY = (int) ball[i].getY();
-			double distance = Math.sqrt((x-drawX)^2+(y-drawY)^2);
-			if(x <= distance || y <= distance){
-				
+		y = e.getY ();	
+		for(int i = 0; i <= numBalls; i++)
+		if(x-50 <= ball[i].getX() && x + 50 >= ball[i].getX()  && y - 50 <= ball[i].getY() && y + 50 >= ball[i].getY()){
+			ball[i].setY(1000000000);
+			points++;
+			if(points==numBalls){
+				done = true;
+				points = 0;
 			}
 		}
-		repaint();	   
-	}
-
+	}   
 	    /**
 	      * called when mouse is dragged in the window
 	      * @param e The mouse event
@@ -180,9 +189,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	    
 	public void mouseDragged (MouseEvent e)	    
 	{	
-		x = e.getX ();	 
-		y = e.getY ();		
-		repaint ();	   
+		
 	}
 	public void exit(){
 		System.exit(0);

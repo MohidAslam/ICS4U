@@ -46,9 +46,9 @@ public class FlashingBall extends MovingObject {
 	 *            The bottom edge.
 	 */
 	public FlashingBall(double x, double y, int left, int right, int top, int bottom) {
-		super(x, y, left + 10, right - 10, top + 10, bottom - 10);
+		super(x, y, left + 5, right - 5, top + 5, bottom - 5);
 		// numbers above must match the radius
-		radius = 10;
+		radius = 5;
 		counter = 0;
 		flashSpeed = (int) (Math.random() * 5 + 5);
 		filledIn = true;
@@ -82,7 +82,7 @@ public class FlashingBall extends MovingObject {
 		g.setColor(color);
 		g.fillOval(drawX, drawY, radius * 2, radius * 2);
 		if (!filledIn) {
-			g.setColor(Color.white);
+			g.setColor(Color.green);
 			g.fillOval(drawX + radius / 2, drawY + radius / 2, radius, radius);
 		}
 	}

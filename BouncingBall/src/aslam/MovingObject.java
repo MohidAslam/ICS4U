@@ -33,19 +33,19 @@ public abstract class MovingObject implements Runnable {
 	/**
 	 * The x location of the object.
 	 */
-	private double x;
+	protected double x;
 	/**
 	 * The y location of the object.
 	 */
-	private double y;
+	protected double y;
 	/**
 	 * The x speed of the object.
 	 */
-	private double xSpeed;
+	protected double xSpeed;
 	/**
 	 * The y speed of the object.
 	 */
-	private double ySpeed;
+	protected double ySpeed;
 	/**
 	 * The left edge for bouncing.
 	 */
@@ -80,9 +80,9 @@ public abstract class MovingObject implements Runnable {
 	 * Sets default color and pauseDuration values. Sets speed to 0. Starts
 	 * thread. Every subclass of MovingObject must use this constructor.
 	 * 
-	 * @param x
+	 * @param d
 	 *            Initial x position.
-	 * @param y
+	 * @param e
 	 *            Initial y position.
 	 * @param left
 	 *            Left edge for bouncing.
@@ -93,14 +93,14 @@ public abstract class MovingObject implements Runnable {
 	 * @param bottom
 	 *            Bottom edge for bouncing.
 	 */
-	public MovingObject(double x, double y, int left, int right, int top,
+	public MovingObject(double d, double e, int left, int right, int top,
 			int bottom) {
 		this.pauseDuration = 40;
 		this.xSpeed = 0;
 		this.ySpeed = 0;
 		this.color = Color.black;
-		this.x = x;
-		this.y = y;
+		this.x = d;
+		this.y = e;
 		this.left = left;
 		this.right = right;
 		this.top = top;
@@ -156,7 +156,6 @@ public abstract class MovingObject implements Runnable {
 	 * Performs one step of animation.
 	 */
 	abstract public void animateOneStep();
-	
 	/**
 	 * Returns the x location.
 	 * 
@@ -166,7 +165,6 @@ public abstract class MovingObject implements Runnable {
 	public double getX() {
 		return x;
 	}
-
 	/**
 	 * Returns the y location.
 	 * 
@@ -176,8 +174,6 @@ public abstract class MovingObject implements Runnable {
 	public double getY() {
 		return y;
 	}
-	
-	
 	/**
 	 * Sets the x speed.
 	 * 
@@ -187,7 +183,6 @@ public abstract class MovingObject implements Runnable {
 	public void setXSpeed(double xSpeed) {
 		this.xSpeed = xSpeed;
 	}
-
 	/**
 	 * Sets the y speed.
 	 * 
@@ -197,7 +192,6 @@ public abstract class MovingObject implements Runnable {
 	public void setYSpeed(double ySpeed) {
 		this.ySpeed = ySpeed;
 	}
-
 	/**
 	 * Sets the x location.
 	 * 
@@ -207,7 +201,6 @@ public abstract class MovingObject implements Runnable {
 	public void setX(int x) {
 		this.x = x;
 	}
-
 	/**
 	 * Sets the y location.
 	 * 
@@ -217,8 +210,6 @@ public abstract class MovingObject implements Runnable {
 	public void setY(int y) {
 		this.y = y;
 	}
-
-
 	/**
 	 * Sets color of object.
 	 * 

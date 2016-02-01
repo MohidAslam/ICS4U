@@ -32,9 +32,9 @@ public class FlashingBall extends MovingObject {
 	/**
 	 * Calls the superclass constructor, plus sets radius, and flash parameters.
 	 * 
-	 * @param x
+	 * @param d
 	 *            The x location.
-	 * @param y
+	 * @param e
 	 *            The y location.
 	 * @param left
 	 *            The left edge.
@@ -45,8 +45,8 @@ public class FlashingBall extends MovingObject {
 	 * @param bottom
 	 *            The bottom edge.
 	 */
-	public FlashingBall(double x, double y, int left, int right, int top, int bottom) {
-		super(x, y, left + 5, right - 5, top + 5, bottom - 5);
+	public FlashingBall(double d, double e, int left, int right, int top, int bottom) {
+		super(d, e, left + 5, right - 5, top + 5, bottom - 5);
 		// numbers above must match the radius
 		radius = 5;
 		counter = 0;
